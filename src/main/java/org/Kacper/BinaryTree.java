@@ -32,8 +32,13 @@ public class BinaryTree {
         }
         // If no operator was found, return a number.
         if (operator == null) {
-            Float number = Float.parseFloat(equation);
-            return new Node<>(number, "Number");
+            try {
+                Float number = Float.parseFloat(equation);
+                return new Node<>(number, "Number");
+            } catch (EmptyEquationException e) {
+                System.out.println("No number found, empty equation: " + e.getMessage());
+                return null;
+            }
         } else {
             // Otherwise, split string into 2 and re-run each part again.
             Node<Character> node = new Node<>(operator, "Operator");
